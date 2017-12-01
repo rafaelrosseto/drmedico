@@ -13,10 +13,10 @@
 		        	<div class="form-group">
 		        		<label class="col-sm-2 control-label" for="specialty">Especialidade</label>
 		        		<div class="col-md-10">
-				        	<select name="date" class="mb-3 form-control custom-select">
-				        		<option>Mustard</option>
-							    <option>Ketchup</option>
-							    <option>Relish</option>
+				        	<select name="specialty" class="mb-3 form-control custom-select">
+				        		@foreach ($specialty as $spec)
+				        			<option id="{{$spec['id']}}">{{$spec['name']}}</option>
+				        		@endforeach
 				        	</select>
 				        </div>
 		        	</div>
@@ -25,16 +25,13 @@
 						<label class="col-sm-2 control-label" for="date">Data da consulta</label>
 						<div class="col-md-10">
 				        	<select name="date" class="mb-3 form-control custom-select">
-							  <optgroup label="Picnic">
-							    <option>Mustard</option>
-							    <option>Ketchup</option>
-							    <option>Relish</option>
-							  </optgroup>
-							  <optgroup label="Camping">
-							    <option>Tent</option>
-							    <option>Flashlight</option>
-							    <option>Toilet Paper</option>
-							  </optgroup>
+				        		@foreach ($schedule as $sch)
+									<optgroup label="{{$sch['date']}}">
+										@foreach ($sch as $hour)
+											<option id="{{$hour['id']}}">{{$hour['time']}}</option>
+										@endforeach
+									</optgroup>
+								@endforeach
 							</select>
 						</div>
 		        	</div>
@@ -42,7 +39,7 @@
 		        	<div class="form-group">
             <label class="col-sm-2 control-label" for="textinput">Descrição (sintomas)</label>
             <div class="col-sm-10">
-              <textarea class="form-control" style="max-width: 756px;" rows="4"></textarea>
+              <textarea name="description" class="form-control" style="max-width: 756px;" rows="4"></textarea>
             </div>
           </div>
 
@@ -50,7 +47,7 @@
 		        </div>
 
 		        <div class="panel-footer panel-custom text-center">
-						<a href="/appointment" class="btn btn-info" role="button">Marcar consulta</a>
+						<button class="btn btn-info" role="submit">Marcar consulta</button>
 						<a href="/history" class="btn btn-default" role="button">Cancelar</a>
 					</div>
 		    </div>
